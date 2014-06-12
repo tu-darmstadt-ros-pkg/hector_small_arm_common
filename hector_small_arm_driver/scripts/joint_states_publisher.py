@@ -2,10 +2,10 @@
 
 # Copyright (c) 2010, Arizona Robotics Research Group, University of Arizona
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
-# 
+#
 #     * Redistributions of source code must retain the above copyright notice,
 #     this list of conditions and the following disclaimer.  * Redistributions
 #     in binary form must reproduce the above copyright notice, this list of
@@ -14,7 +14,7 @@
 #     the Willow Garage, Inc. nor the names of its contributors may be used to
 #     endorse or promote products derived from this software without specific
 #     prior written permission.
-# 
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 'AS IS'
 # AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 # IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -29,7 +29,7 @@
 #
 # Modified for Team Hector of TU Darmstadt by Laura Strickland
 
-import roslib; roslib.load_manifest('hector_arm_driver') 
+import roslib; roslib.load_manifest('hector_small_arm_driver') 
 import rospy
 
 from sensor_msgs.msg import JointState as JointStatePR2
@@ -45,7 +45,7 @@ class JointStateMessage():
 class JointStatesPublisher():
     def __init__(self):
         rospy.init_node('thumper_arm_states_publisher', anonymous=True)
-                          
+
         self.controllers = ('joint0_controller',
                             'joint1_controller',
                             'joint2_controller',
@@ -53,26 +53,26 @@ class JointStatesPublisher():
                             'joint4_controller',
                             'ls_roll_controller',
                             'ls_pitch_controller')
-        self.joint_states={}                    
-                            
+        self.joint_states={}
+
         # Start controller state subscribers
         [rospy.Subscriber(c + '/state', JointStateAX12, self.controller_state_handler) for c in self.controllers]
-        
+
         # Start publisher
         self.joint_states_pub = rospy.Publisher('joint_states', JointStatePR2)
-        
+
         publish_rate = rospy.get_param('~rate', 50)
         r = rospy.Rate(publish_rate)
-        
+
         while not rospy.is_shutdown():
             self.publish_joint_states()
             r.sleep()
-            
+
     def controller_state_handler(self, msg):
  #       jcs = JointStateMessage(msg.name, (msg.name == ('joint4' or 'joint3' or 'joint2') ? -msg.current_pos : msg.current_pos), msg.velocity, msg.load) #Is the syntax here right?
 
         self.joint_states[msg.name] = JointStateMessage(msg.name, msg.current_pos, msg.velocity, msg.load)
-        
+
     def publish_joint_states(self):
         # Construct message & publish joint states
         msg = JointStatePR2()
@@ -80,13 +80,13 @@ class JointStatesPublisher():
         msg.position = []
         msg.velocity = []
         msg.effort = []
-        
+
         for joint in self.joint_states.values():
           msg.name.append(joint.name)
           msg.position.append(joint.position)
           msg.velocity.append(joint.velocity)
           msg.effort.append(joint.effort)
-            
+
           msg.header.stamp = rospy.Time.now()
           self.joint_states_pub.publish(msg)
 
@@ -95,4 +95,3 @@ if __name__ == '__main__':
         s = JointStatesPublisher()
         rospy.spin()
     except rospy.ROSInterruptException: pass
-

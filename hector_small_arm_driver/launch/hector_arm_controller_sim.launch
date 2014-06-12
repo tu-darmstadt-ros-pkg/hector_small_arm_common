@@ -5,7 +5,7 @@
     <node name="hector_arm_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
     </node>
     <!-- Start upper and lower arm joint controllers -->
-    <rosparam file="$(find hector_arm_driver)/config/hector_arm_controller_sim.yaml" command="load"/>
+    <rosparam file="$(find hector_small_arm_driver)/config/hector_arm_controller_sim.yaml" command="load"/>
 
     <node name="hector_arm_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
           args="joint0_controller
