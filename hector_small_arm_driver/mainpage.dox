@@ -1,0 +1,15 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b hector_small_arm_driver 
+
+<!-- 
+Provides launch files and joint state publisher for interfacing with Dynamixel motors.
+
+-->
+
+-->
+
+
+*/
