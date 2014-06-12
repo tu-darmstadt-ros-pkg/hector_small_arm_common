@@ -31,5 +31,5 @@ catkin_package(
 include_directories(${Boost_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS})
 
 add_executable(joint_state_publisher_cpp src/joint_state_publisher.cpp)
-target_link_libraries(laserscan_to_pointcloud_node ${Boost_LIBRARIES} ${catkin_LIBRARIES} )
+target_link_libraries(joint_state_publisher_cpp ${Boost_LIBRARIES} ${catkin_LIBRARIES} )
 
