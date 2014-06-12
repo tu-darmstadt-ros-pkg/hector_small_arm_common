@@ -70,8 +70,8 @@ private:
 
     std::vector<std::string> joint_name_vector_;
 
-    std::map<std::string, double> joint_vel_cmds_;
     std::map<std::string, double> joint_positions_;
+    std::map<std::string, double> joint_pos_cmds_;
     std::map<std::string, double> joint_velocitys_;
     std::map<std::string, double> joint_efforts_;
 
@@ -84,8 +84,6 @@ private:
     ros::CallbackQueue subscriber_queue_;
 
     hardware_interface::JointStateInterface joint_state_interface_;
-    hardware_interface::VelocityJointInterface velocity_joint_interface_;
-    joint_limits_interface::VelocityJointSoftLimitsInterface  velocity_joint_limit_interface_;
     hardware_interface::PositionJointInterface position_joint_interface_;
 
 };

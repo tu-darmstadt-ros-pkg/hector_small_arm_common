@@ -45,7 +45,6 @@ namespace hector_small_arm_control
 
 Hector_Small_Arm_Control::Hector_Small_Arm_Control()
 {
-
     joint_name_vector_.push_back("joint0_controller");
     joint_name_vector_.push_back("joint1_controller");
     joint_name_vector_.push_back("joint2_controller");
@@ -56,7 +55,6 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
 
   for(unsigned int i=0; i<joint_name_vector_.size(); i++)
     {
-        joint_vel_cmds_[joint_name_vector_[i]] = 0.0;
         joint_positions_[joint_name_vector_[i]] = 0.0;
         joint_velocitys_[joint_name_vector_[i]] = 0.0;
         joint_efforts_[joint_name_vector_[i]] = 0.0;
@@ -71,12 +69,11 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
         hardware_interface::JointStateHandle state_handle(joint_name_vector_[i], &joint_positions_[joint_name_vector_[i]], &joint_velocitys_[joint_name_vector_[i]], &joint_efforts_[joint_name_vector_[i]]);
         joint_state_interface_.registerHandle(state_handle);
 
-        hardware_interface::JointHandle vel_handle(joint_state_interface_.getHandle(joint_name_vector_[i]), &joint_vel_cmds_[joint_name_vector_[i]]);
-        velocity_joint_interface_.registerHandle(vel_handle);
+        hardware_interface::JointHandle pos_handle(joint_state_interface_.getHandle(joint_name_vector_[i]), &joint_pos_cmds_[joint_name_vector_[i]]);
+        position_joint_interface_.registerHandle(pos_handle);
     }
 
     registerInterface(&joint_state_interface_);
-    registerInterface(&velocity_joint_interface_);
     registerInterface(&position_joint_interface_);
 
     subscriber_spinner_.reset(new ros::AsyncSpinner(1, &subscriber_queue_));
@@ -101,7 +98,7 @@ void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
     for(unsigned int i=0; i<joint_name_vector_.size(); i++)
       {
         std_msgs::Float64 msg;
-        msg.data = joint_positions_[joint_name_vector_[i]];
+        msg.data = joint_pos_cmds_[joint_name_vector_[i]];
         joint_cmd_pubs_[joint_name_vector_[i]].publish(msg);
     }
 }
