@@ -17,7 +17,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *   * Neither the name of Graz University of Technology nor the names of
+ *   * Neither the name of Technische Universität Darmstadt nor the names of
  *     its contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
  *
@@ -40,10 +40,15 @@
 #define hector_small_arm_control_hpp___
 
 #include <ros/ros.h>
-//#include <hardware_interface/joint_command_interface.h>
-//#include <hardware_interface/joint_state_interface.h>
-//#include <joint_limits_interface/joint_limits_interface.h>
-//#include <hardware_interface/robot_hw.h>
+#include <hardware_interface/joint_command_interface.h>
+#include <hardware_interface/joint_state_interface.h>
+#include <joint_limits_interface/joint_limits_interface.h>
+#include <hardware_interface/robot_hw.h>
+
+#include <std_msgs/Float64.h>
+#include <dynamixel_msgs/JointState.h>
+
+#include <ros/callback_queue.h>
 
 namespace hector_small_arm_control
 {
@@ -59,8 +64,31 @@ public:
     void write(ros::Time time, ros::Duration period);
 
 private:
+    void jointStateCallback(const dynamixel_msgs::JointStateConstPtr& dyn_joint_state);
+
     ros::NodeHandle nh_;
-}
+
+    std::vector<std::string> joint_name_vector_;
+
+    std::map<std::string, double> joint_vel_cmds_;
+    std::map<std::string, double> joint_positions_;
+    std::map<std::string, double> joint_velocitys_;
+    std::map<std::string, double> joint_efforts_;
+
+    std::map<std::string, ros::Publisher> joint_cmd_pubs_;
+    std::map<std::string, ros::Subscriber> joint_state_subs_;
+
+    std::map<std::string, dynamixel_msgs::JointStateConstPtr> received_joint_states_;
+
+    boost::shared_ptr<ros::AsyncSpinner> subscriber_spinner_;
+    ros::CallbackQueue subscriber_queue_;
+
+    hardware_interface::JointStateInterface joint_state_interface_;
+    hardware_interface::VelocityJointInterface velocity_joint_interface_;
+    joint_limits_interface::VelocityJointSoftLimitsInterface  velocity_joint_limit_interface_;
+    hardware_interface::PositionJointInterface position_joint_interface_;
+
+};
 
 }
 

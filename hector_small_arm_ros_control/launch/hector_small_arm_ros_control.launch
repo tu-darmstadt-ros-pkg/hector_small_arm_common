@@ -1,0 +1,7 @@
+<!-- -*- mode: XML -*- -->
+
+<launch>
+
+    <node name="hector_small_arm_ros_control" pkg="hector_small_arm_ros_control" type="hector_small_arm_ros_control_node"/>
+
+ </launch>

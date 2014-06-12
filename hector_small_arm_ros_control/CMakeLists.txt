@@ -7,6 +7,8 @@ project(hector_small_arm_ros_control)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  hardware_interface
+  controller_manager
 )
 
 ## System dependencies are found with CMake's conventions
@@ -93,6 +95,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -102,16 +105,19 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-add_executable(hector_small_arm_ros_control_node src/hector_small_arm_control.cpp)
+add_executable(hector_small_arm_ros_control_node
+    include/hector_small_arm_ros_control/hector_small_arm_control.hpp
+    src/hector_small_arm_control.cpp
+    )
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(hector_small_arm_ros_control_node hector_small_arm_ros_control_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(hector_small_arm_ros_control_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(hector_small_arm_ros_control_node
+   ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
