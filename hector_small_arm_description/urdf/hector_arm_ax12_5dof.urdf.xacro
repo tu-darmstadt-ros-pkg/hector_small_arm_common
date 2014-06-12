@@ -1,0 +1,281 @@
+<?xml version="1.0"?>
+
+<robot name="hector_arm"
+xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+  
+    <!-- Properties (Constants) -->
+    <property name="M_PI" value="3.14159"/>
+    <property name="M_PI_H" value="1.57079"/>
+    
+    <macro name="hector_arm" params="parent *origin">
+    
+      <!-- ****** JOINT DEFINITIONS ****** -->
+      <joint name="arm_base_joint" type="fixed">
+	<insert_block name="origin" /> 
+	<parent link="${parent}"/>
+	<child link="arm_base_link"/>
+      </joint>
+      
+      <joint name="joint_0" type="revolute">
+	<parent link="arm_base_link"/>
+	<child link="connector"/>
+	<origin xyz="0 0 0.03" rpy="0 0 0" /> 
+	<axis xyz="0 0 1" />		
+	<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--	<safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+	<dynamics damping="1.0" friction="1.0"/>
+      </joint>
+      
+      <joint name="joint_1" type="revolute">
+	<parent link="connector"/>
+	<child link="link1"/>
+	<origin xyz="0.055 0 0.01" rpy="${M_PI_H} 0 ${M_PI}" />
+	<axis xyz="0 0 1" />		
+	<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--		<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" /> -->
+<!--	<safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+	<dynamics damping="1.0" friction="1.0"/>			
+      </joint>
+      
+      <joint name="joint_2" type="revolute">
+	<parent link="link1"/>
+	<child link="link2"/>
+	<origin xyz="0.355 0.03 0.001" rpy="0 ${M_PI} 0" />
+	<axis xyz="0 0 1" />
+	<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--	<safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+	<dynamics damping="1.0" friction="1.0"/>
+      </joint>
+
+<joint name="joint_3" type="revolute">
+	<parent link="link2"/>
+	<child link="endeffector_nick_link"/>
+	<origin xyz="0.355 0.03 0.0" rpy="0 ${M_PI} 0" />
+	<axis xyz="0 0 -1" />
+	<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--	<safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+	<dynamics damping="1.0" friction="1.0"/>
+      </joint>
+
+<joint name="joint_4" type="revolute">
+	<parent link="endeffector_nick_link"/>
+	<child link="endeffector_yaw_link"/>
+	<origin xyz="0.0 0.035 0.0" rpy="${M_PI*0.5} ${M_PI} 0" />
+	<axis xyz="0 0 -1" />
+	<limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--	<safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+	<dynamics damping="1.0" friction="1.0"/>
+      </joint>
+      
+      <!-- ****** LINK DEFINITIONS ****** -->
+      
+      <link name="arm_base_link">
+	<inertial>
+	  <mass value="0.25" />
+	  <origin xyz="0 0 0" rpy="0 0 0" />
+	  <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+	</inertial>
+	
+	<visual>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_0.stl"/>
+	  </geometry>
+	  <material name="red">
+	    <color rgba="1.0 0.0 0.0 1"/>
+	  </material>
+	</visual>
+	
+        <collision>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_0.stl"/>
+	  </geometry>
+	</collision>
+      </link>
+      
+      <link name="connector" >
+	<inertial>
+	  <mass value="0.2" />
+	  <origin xyz="-0.027 0 0" rpy="0 0 0" />
+	  <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+	</inertial>	
+	
+	<visual>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_1.stl"/>
+	  </geometry>
+	  <material name="green">
+	    <color rgba="0.0 1.0 0.0 1"/>
+	  </material>
+	</visual>
+	
+	<collision>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_1.stl"/>
+	  </geometry>
+	</collision>	
+      </link>
+      
+      <link name="link1">
+	<inertial>
+	  <mass value="0.15" />
+	  <origin xyz="0.155 0.0 0.032" rpy="0 0 0" />
+	  <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+	</inertial>
+	
+	<visual>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 ${M_PI} 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_2.stl"/>
+	  </geometry>
+	  <material name="blue">
+	    <color rgba="0.0 0.0 1.0 1"/>
+	  </material>
+	</visual>
+	
+	<collision>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 ${M_PI} 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_2.stl"/>
+	  </geometry>
+	</collision>
+      </link>
+      
+      <link name="link2">
+	<inertial>
+	  <mass value="0.15" />
+	  <origin xyz="0.155 0.0 0.032" rpy="0 0 0" />
+	  <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001" />
+	</inertial>
+	
+	<visual>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_3.stl"/>
+	  </geometry>
+	  <material name="red">
+	    <color rgba="1.0 0.0 0.0 1"/>
+	  </material>
+	</visual>
+	
+	<collision>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_3.stl"/>
+	  </geometry>
+	</collision>
+      </link>
+
+ <link name="endeffector_nick_link">
+	<inertial>
+	  <mass value="0.1" />
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+	</inertial>
+	
+	<visual>
+	  <origin xyz="0.0 0.0 -0.03" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_0.stl"/>
+	  </geometry>
+	  <material name="red">
+	    <color rgba="1.0 0.0 0.0 1"/>
+	  </material>
+	</visual>
+	
+        <collision>
+	  <origin xyz="0.0 0.0 -0.03" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_0.stl"/>
+	  </geometry>
+	</collision>
+      </link>
+
+ <link name="endeffector_yaw_link">
+	<inertial>
+	  <mass value="0.1" />
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+	</inertial>
+	
+	<visual>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_4_v2.stl"/>
+	  </geometry>
+	  <material name="red">
+	    <color rgba="1.0 0.0 0.0 1"/>
+	  </material>
+	</visual>
+	
+        <collision>
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+	  <geometry>
+	    <mesh filename="package://hector_small_arm_description/meshes/hector_arm/hector_arm_link_4_v2.stl"/>
+	  </geometry>
+	</collision>
+      </link>
+      
+<!-- ****** TRANSMISSION DEFINITIONS ****** -->
+	<transmission type="pr2_mechanism_model/SimpleTransmission" name="plane_trans">
+	    <actuator name="plane_motor" />
+	    <joint name="joint_0" />
+	    <mechanicalReduction>1.0</mechanicalReduction>
+	</transmission>
+	
+	<transmission type="pr2_mechanism_model/SimpleTransmission" name="shoulder_trans">
+	    <actuator name="shoulder_motor" />
+	    <joint name="joint_1" />
+	    <mechanicalReduction>1.0</mechanicalReduction>
+	</transmission>
+	
+	<transmission type="pr2_mechanism_model/SimpleTransmission" name="elbow_trans">
+	    <actuator name="elbow_motor" />
+	    <joint name="joint_2" />
+	    <mechanicalReduction>1.0</mechanicalReduction>
+	</transmission>
+	
+	<transmission type="pr2_mechanism_model/SimpleTransmission" name="endeffector_nick_trans">
+	    <actuator name="endeffector_nick_motor" />
+	    <joint name="joint_3" />
+	    <mechanicalReduction>1.0</mechanicalReduction>
+	</transmission>
+
+	<transmission type="pr2_mechanism_model/SimpleTransmission" name="endeffector_yaw_trans">
+	    <actuator name="endeffector_yaw_motor" />
+	    <joint name="joint_4" />
+	    <mechanicalReduction>1.0</mechanicalReduction>
+	</transmission>
+	<!-- ****** MATERIAL DEFINITIONS ****** -->
+	
+	<gazebo reference="arm_base_link">
+	  <material>Gazebo/Red</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+		<gazebo reference="connector">
+	  <material>Gazebo/Blue</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+	<gazebo reference="link1">
+	  <material>Gazebo/Green</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+	<gazebo reference="link2">
+	  <material>Gazebo/Red</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+	<gazebo reference="endeffector_nick_link">
+	  <material>Gazebo/Green</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+	<gazebo reference="endeffector_yaw_link">
+	  <material>Gazebo/Blue</material>
+	    <turnGravityOff>true</turnGravityOff>
+	</gazebo>
+    </macro>
+  </robot>

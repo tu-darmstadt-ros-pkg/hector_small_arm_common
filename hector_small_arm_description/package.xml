@@ -1,0 +1,23 @@
+<package>
+  <name>hector_small_arm_description</name>
+  <version>0.0.0</version>
+  <description>This package contains the description (mechanical, kinematic, visual,
+  etc.) of the small hector arm system</description>
+ 
+  <license>LGPL</license>
+
+  <url type="website">http://ros.org/wiki/hector_small_arm_description</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <maintainer email="kohlbrecher@sim.tu-darmstadt.de">Stefan Kohlbrecher</maintainer>
+  <author email="kohlbrecher@sim.tu-darmstadt.de">Stefan Kohlbrecher</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <test_depend>gtest</test_depend>
+  <test_depend>urdfdom</test_depend>
+
+  <export>
+    <!--<gazebo_ros gazebo_media_path="${prefix}"/>-->
+  </export>
+</package>
