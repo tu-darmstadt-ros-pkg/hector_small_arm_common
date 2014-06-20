@@ -22,11 +22,11 @@
           args="--manager=hector_arm_manager
                 --port=hector_arm_port
                 --type=simple
-								joint_0_controller
-                joint_1_controller
-                joint_2_controller
-								joint_3_controller
-								joint_4_controller"
+								joint0_controller
+                joint1_controller
+                joint2_controller
+								joint3_controller
+								joint4_controller"
                 output="screen"/>
 
     <node name="joint_states_publisher" pkg="hector_small_arm_driver" type="joint_states_publisher.py"/>

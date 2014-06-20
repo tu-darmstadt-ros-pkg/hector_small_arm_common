@@ -1,6 +1,6 @@
 joint0_controller:
   type: robot_mechanism_controllers/JointPositionController
-  joint: joint_0
+  joint: joint0
   pid:
     p: 1.0
     i: 0.4
@@ -8,7 +8,7 @@ joint0_controller:
 
 joint1_controller:
   type: robot_mechanism_controllers/JointPositionController
-  joint: joint_1
+  joint: joint1
   pid:
     p: 1.0
     i: 0.4
@@ -16,7 +16,7 @@ joint1_controller:
 
 joint2_controller:
   type: robot_mechanism_controllers/JointPositionController
-  joint: joint_2
+  joint: joint2
   pid:
     p: 1.0
     i: 0.4
@@ -25,7 +25,7 @@ joint2_controller:
 
 joint3_controller:
   type: robot_mechanism_controllers/JointPositionController
-  joint: joint_3
+  joint: joint3
   pid:
     p: 1.0
     i: 0.4
@@ -33,7 +33,7 @@ joint3_controller:
 
 joint4_controller:
   type: robot_mechanism_controllers/JointPositionController
-  joint: joint_4
+  joint: joint4
   pid:
     p: 1.0
     i: 0.4

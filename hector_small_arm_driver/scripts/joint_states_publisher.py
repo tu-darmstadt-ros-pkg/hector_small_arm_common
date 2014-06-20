@@ -29,7 +29,7 @@
 #
 # Modified for Team Hector of TU Darmstadt by Laura Strickland
 
-import roslib; roslib.load_manifest('hector_small_arm_driver') 
+import roslib; roslib.load_manifest('hector_small_arm_driver')
 import rospy
 
 from sensor_msgs.msg import JointState as JointStatePR2
@@ -46,11 +46,11 @@ class JointStatesPublisher():
     def __init__(self):
         rospy.init_node('thumper_arm_states_publisher', anonymous=True)
 
-        self.controllers = ('joint0_controller',
-                            'joint1_controller',
-                            'joint2_controller',
-                            'joint3_controller',
-                            'joint4_controller',
+        self.controllers = ('joint_0_controller',
+                            'joint_1_controller',
+                            'joint_2_controller',
+                            'joint_3_controller',
+                            'joint_4_controller',
                             'ls_roll_controller',
                             'ls_pitch_controller')
         self.joint_states={}

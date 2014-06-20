@@ -1,4 +1,4 @@
-joint_0_controller:
+joint0_controller:
     controller:
         package: dynamixel_controllers
         module: joint_position_controller
@@ -11,7 +11,7 @@ joint_0_controller:
         min: 0
         max: 1023
 
-joint_1_controller:
+joint1_controller:
     controller:
         package: dynamixel_controllers
         module: joint_position_controller
@@ -24,7 +24,7 @@ joint_1_controller:
         min: 0
         max: 1023
 
-joint_2_controller:
+joint2_controller:
     controller:
         package: dynamixel_controllers
         module: joint_position_controller
@@ -38,7 +38,7 @@ joint_2_controller:
         max: 1023
 
 
-joint_3_controller:
+joint3_controller:
     controller:
         package: dynamixel_controllers
         module: joint_position_controller
@@ -51,7 +51,7 @@ joint_3_controller:
         min: 0
         max: 1023
 
-joint_4_controller:
+joint4_controller:
     controller:
         package: dynamixel_controllers
         module: joint_position_controller
