@@ -52,6 +52,13 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
     joint_name_vector_.push_back("joint4_controller");
     joint_name_vector_.push_back("joint5_controller");
 
+    joint_offset["joint0_controller"] = 0.14317154020265985;
+    joint_offset["joint1_controller"] = -1.1351457830353746;
+    joint_offset["joint2_controller"] = 1.5033011721279284;
+    joint_offset["joint3_controller"] = 0.6749515466696822;
+    joint_offset["joint4_controller"] = 0.32213596545598466;
+    joint_offset["joint5_controller"] = 0;
+
   for(unsigned int i=0; i<joint_name_vector_.size(); i++)
     {
         joint_positions_[joint_name_vector_[i]] = 0.0;
@@ -90,7 +97,7 @@ void Hector_Small_Arm_Control::read(ros::Time time, ros::Duration period)
 {
     for(unsigned int i=0; i<joint_name_vector_.size()-1; i++)
     {
-        joint_positions_[joint_name_vector_[i]] = received_joint_states_[joint_name_vector_[i]]->current_pos;
+        joint_positions_[joint_name_vector_[i]] = received_joint_states_[joint_name_vector_[i]]->current_pos - joint_offset[joint_name_vector_[i]];
     }
 
     //take last dof as fake

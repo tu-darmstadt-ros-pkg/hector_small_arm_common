@@ -88,6 +88,7 @@ private:
 
 
     double _fake_dof_value;
+    std::map<std::string, double> joint_offset;
 };
 
 }

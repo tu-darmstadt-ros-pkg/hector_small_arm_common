@@ -7,9 +7,9 @@ joint_0_controller:
     joint_speed: 1.17
     motor:
         id: 10
-        init: 512
-        min: 0
-        max: 1023
+        init: 550
+        min: 270
+        max: 840
 
 joint_1_controller:
     controller:
@@ -20,9 +20,9 @@ joint_1_controller:
     joint_speed: 1.17
     motor:
         id: 11
-        init: 512
-        min: 0
-        max: 1023
+        init: 590
+        min: 300
+        max: 900
 
 joint_2_controller:
     controller:
