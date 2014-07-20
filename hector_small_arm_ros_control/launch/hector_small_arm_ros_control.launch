@@ -4,4 +4,7 @@
 
     <node name="hector_small_arm_ros_control" pkg="hector_small_arm_ros_control" type="hector_small_arm_ros_control_node"/>
 
+    <rosparam file="$(find hector_small_arm_ros_control)/config/joint_state_controller.yaml" command="load"/>
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
+
  </launch>
