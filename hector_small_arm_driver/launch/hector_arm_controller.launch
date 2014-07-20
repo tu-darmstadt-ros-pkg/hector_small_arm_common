@@ -29,7 +29,7 @@
 								joint_4_controller"
                 output="screen"/>
 
-    <node name="joint_states_publisher" pkg="hector_small_arm_driver" type="joint_states_publisher.py"/>
+    <!--<node name="joint_states_publisher" pkg="hector_small_arm_driver" type="joint_states_publisher.py"/>-->
 
     <!-- start robot state publisher -->
   <!--<node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" output="screen" >
