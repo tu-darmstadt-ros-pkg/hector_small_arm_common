@@ -112,7 +112,7 @@ void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
     for(unsigned int i=0; i<joint_name_vector_.size(); i++)
       {
         std_msgs::Float64 msg;
-        msg.data = joint_pos_cmds_[joint_name_vector_[i]];
+        msg.data = joint_pos_cmds_[joint_name_vector_[i]] + joint_offset[joint_name_vector_[i]];
         joint_cmd_pubs_[joint_name_vector_[i]].publish(msg);
     }
 
