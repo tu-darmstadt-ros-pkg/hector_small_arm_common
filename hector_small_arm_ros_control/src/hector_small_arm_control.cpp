@@ -45,19 +45,19 @@ namespace hector_small_arm_control
 
 Hector_Small_Arm_Control::Hector_Small_Arm_Control()
 {
-    joint_name_vector_.push_back("joint0_controller");
-    joint_name_vector_.push_back("joint1_controller");
-    joint_name_vector_.push_back("joint2_controller");
-    joint_name_vector_.push_back("joint3_controller");
-    joint_name_vector_.push_back("joint4_controller");
-    joint_name_vector_.push_back("joint5_controller");
+    joint_name_vector_.push_back("joint_0");
+    joint_name_vector_.push_back("joint_1");
+    joint_name_vector_.push_back("joint_2");
+    joint_name_vector_.push_back("joint_3");
+    joint_name_vector_.push_back("joint_4");
+    joint_name_vector_.push_back("joint_5");
 
-    joint_offset["joint0_controller"] = 0.14317154020265985;
-    joint_offset["joint1_controller"] = -1.1351457830353746;
-    joint_offset["joint2_controller"] = 1.5033011721279284;
-    joint_offset["joint3_controller"] = 0.6749515466696822;
-    joint_offset["joint4_controller"] = 0.32213596545598466;
-    joint_offset["joint5_controller"] = 0;
+    joint_offset["joint_0"] = 0.14317154020265985;
+    joint_offset["joint_1"] = -1.1351457830353746;
+    joint_offset["joint_2"] = 1.5033011721279284;
+    joint_offset["joint_3"] = 0.6749515466696822;
+    joint_offset["joint_4"] = 0.32213596545598466;
+    joint_offset["joint_5"] = 0;
 
   for(unsigned int i=0; i<joint_name_vector_.size(); i++)
     {

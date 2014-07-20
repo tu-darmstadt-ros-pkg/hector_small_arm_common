@@ -7,11 +7,11 @@ class HectorJointStatePublisher{
 public:
   HectorJointStatePublisher()
   {
-    joint_name_vector.push_back("joint_0_controller");
-    joint_name_vector.push_back("joint_1_controller");
-    joint_name_vector.push_back("joint_2_controller");
-    joint_name_vector.push_back("joint_3_controller");
-    joint_name_vector.push_back("joint_4_controller");
+    joint_name_vector.push_back("joint_0");
+    joint_name_vector.push_back("joint_1");
+    joint_name_vector.push_back("joint_2");
+    joint_name_vector.push_back("joint_3");
+    joint_name_vector.push_back("joint_4");
     joint_name_vector.push_back("ls_roll_controller");
     joint_name_vector.push_back("ls_pitch_controller");
 
