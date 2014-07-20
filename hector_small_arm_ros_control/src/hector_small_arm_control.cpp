@@ -49,9 +49,8 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
     joint_name_vector_.push_back("joint1_controller");
     joint_name_vector_.push_back("joint2_controller");
     joint_name_vector_.push_back("joint3_controller");
-    //joint_name_vector.push_back("joint4_controller");
-    //joint_name_vector.push_back("ls_roll_controller");
-    //joint_name_vector.push_back("ls_pitch_controller");
+    joint_name_vector_.push_back("joint4_controller");
+    joint_name_vector_.push_back("joint5_controller");
 
   for(unsigned int i=0; i<joint_name_vector_.size(); i++)
     {
@@ -78,6 +77,8 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
 
     subscriber_spinner_.reset(new ros::AsyncSpinner(1, &subscriber_queue_));
     subscriber_spinner_->start();
+
+    _fake_dof_value = 0.0;
 }
 
 void Hector_Small_Arm_Control::cleanup()
@@ -87,10 +88,13 @@ void Hector_Small_Arm_Control::cleanup()
 
 void Hector_Small_Arm_Control::read(ros::Time time, ros::Duration period)
 {
-    for(unsigned int i=0; i<joint_name_vector_.size(); i++)
+    for(unsigned int i=0; i<joint_name_vector_.size()-1; i++)
     {
         joint_positions_[joint_name_vector_[i]] = received_joint_states_[joint_name_vector_[i]]->current_pos;
     }
+
+    //take last dof as fake
+    joint_positions_[joint_name_vector_[joint_name_vector_.size()-1]] = _fake_dof_value;
 }
 
 void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
@@ -101,6 +105,9 @@ void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
         msg.data = joint_pos_cmds_[joint_name_vector_[i]];
         joint_cmd_pubs_[joint_name_vector_[i]].publish(msg);
     }
+
+   //remember last joint value for fake 6. dof
+   _fake_dof_value = joint_pos_cmds_[joint_name_vector_[joint_name_vector_.size()-1]];
 }
 
 void Hector_Small_Arm_Control::jointStateCallback(const dynamixel_msgs::JointStateConstPtr& dyn_joint_state)

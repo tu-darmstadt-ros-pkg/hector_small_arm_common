@@ -86,6 +86,8 @@ private:
     hardware_interface::JointStateInterface joint_state_interface_;
     hardware_interface::PositionJointInterface position_joint_interface_;
 
+
+    double _fake_dof_value;
 };
 
 }

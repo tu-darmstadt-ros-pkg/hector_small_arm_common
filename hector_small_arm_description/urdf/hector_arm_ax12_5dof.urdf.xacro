@@ -69,6 +69,17 @@ xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controlle
 	<dynamics damping="1.0" friction="1.0"/>
       </joint>
 
+<!-- fake 6. dof-->
+<joint name="joint_5" type="revolute">
+  <parent link="endeffector_yaw_link"/>
+  <child link="endeffector_fake_roll_link"/>
+  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+  <axis xyz="1 0 0" />
+  <limit  lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.5708" />
+<!--    <safety_controller k_position="0.1" k_velocity="1.0" soft_lower_limit="${-1.5708+0.1}" soft_upper_limit="${1.5708-0.1}" />-->
+  <dynamics damping="1.0" friction="1.0"/>
+</joint>
+
       <!-- ****** LINK DEFINITIONS ****** -->
 
       <link name="arm_base_link">
@@ -238,6 +249,10 @@ xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controlle
 	  </geometry>
 	</collision>
       </link>
+
+  <link name="endeffector_fake_roll_link">
+
+  </link>
 
 <!-- ****** TRANSMISSION DEFINITIONS ****** -->
 	<transmission type="pr2_mechanism_model/SimpleTransmission" name="plane_trans">

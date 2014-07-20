@@ -4,16 +4,16 @@
     xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
     xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
     xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
-    
+
     <!-- Included URDF Files -->
     <include filename="$(find hector_small_arm_description)/urdf/hector_arm_ax12_5dof.urdf.xacro" />
      <link name="base">
 	<inertial>
 	  <mass value="0.1" />
-	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />  
+	  <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
 	  <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
 	</inertial>
-	
+
 	<visual>
 	  <origin xyz="0.0 0.0 -0.03" rpy="0 0 0" />
 	  <geometry>
@@ -23,7 +23,7 @@
 	    <color rgba="1.0 0.0 0.0 1"/>
 	  </material>
 	</visual>
-	
+
         <collision>
 	  <origin xyz="0.0 0.0 -0.03" rpy="0 0 0" />
 	  <geometry>
