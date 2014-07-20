@@ -4,7 +4,7 @@
 	<!--<param name="robot_description" textfile="$(find hector_arm_urdf)/urdf/hector_arm.xml" />-->
         <param name="robot_description" command="$(find xacro)/xacro.py $(find hector_small_arm_description)/urdf/hector_arm_ax12_5dof_standalone.urdf.xacro" />
 	<param name="use_gui" value="True"/>
-	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+	<!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>-->
 	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 	<node name="rviz" pkg="rviz" type="rviz" />
 </launch>
