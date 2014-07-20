@@ -95,6 +95,9 @@ void Hector_Small_Arm_Control::cleanup()
 
 void Hector_Small_Arm_Control::read(ros::Time time, ros::Duration period)
 {
+    if(received_joint_states_.size()<5){
+        return;
+    }
     for(unsigned int i=0; i<joint_name_vector_.size()-1; i++)
     {
         joint_positions_[joint_name_vector_[i]] = received_joint_states_[joint_name_vector_[i]]->current_pos - joint_offset[joint_name_vector_[i]];
@@ -119,7 +122,7 @@ void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
 
 void Hector_Small_Arm_Control::jointStateCallback(const dynamixel_msgs::JointStateConstPtr& dyn_joint_state)
 {
-    received_joint_states_[dyn_joint_state->name] = dyn_joint_state;
+   // received_joint_states_[dyn_joint_state->name] = dyn_joint_state;
 }
 
 }
@@ -127,6 +130,7 @@ void Hector_Small_Arm_Control::jointStateCallback(const dynamixel_msgs::JointSta
 int main(int argc, char** argv){
 
 try{
+        ROS_INFO("starting");
         ros::init(argc, argv, "hector_small_arm_control");
 
         hector_small_arm_control::Hector_Small_Arm_Control hector_small_arm;
