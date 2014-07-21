@@ -52,11 +52,11 @@ Hector_Small_Arm_Control::Hector_Small_Arm_Control()
     joint_name_vector_.push_back("joint_4");
     joint_name_vector_.push_back("joint_5");
 
-    joint_offset["joint_0"] = 0.14317154020265985;
-    joint_offset["joint_1"] = -1.1351457830353746;
-    joint_offset["joint_2"] = 1.5033011721279284;
-    joint_offset["joint_3"] = 0.6749515466696822;
-    joint_offset["joint_4"] = 0.32213596545598466;
+    joint_offset["joint_0"] = -0.06135923151542565;
+    joint_offset["joint_1"] = -1.5288675185926892;
+    joint_offset["joint_2"] = 1.5135277107138327;
+    joint_offset["joint_3"] = 0.5011003907093095;
+    joint_offset["joint_4"] = 0.43974115919388385;
     joint_offset["joint_5"] = 0;
 
   for(unsigned int i=0; i<joint_name_vector_.size(); i++)
@@ -122,7 +122,7 @@ void Hector_Small_Arm_Control::write(ros::Time time, ros::Duration period)
 
 void Hector_Small_Arm_Control::jointStateCallback(const dynamixel_msgs::JointStateConstPtr& dyn_joint_state)
 {
-   // received_joint_states_[dyn_joint_state->name] = dyn_joint_state;
+   received_joint_states_[dyn_joint_state->name] = dyn_joint_state;
 }
 
 }

@@ -63,6 +63,7 @@ public:
     void read(ros::Time time, ros::Duration period);
     void write(ros::Time time, ros::Duration period);
 
+
 private:
     void jointStateCallback(const dynamixel_msgs::JointStateConstPtr& dyn_joint_state);
 
