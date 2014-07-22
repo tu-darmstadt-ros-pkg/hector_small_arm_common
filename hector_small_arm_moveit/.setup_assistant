@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: hector_tracked_vehicles_description
+    relative_path: urdf/obelix_ugv_vision_box_small_arm.urdf.xacro
+  SRDF:
+    relative_path: config/obelix_ugv.srdf
+  CONFIG:
+    generated_timestamp: 1405978965

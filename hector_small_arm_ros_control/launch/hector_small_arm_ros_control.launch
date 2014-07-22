@@ -2,9 +2,19 @@
 
 <launch>
 
-    <node name="hector_small_arm_ros_control" pkg="hector_small_arm_ros_control" type="hector_small_arm_ros_control_node"/>
+    <!-- robot state publisher -->
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher"/>
+
+    <node name="hector_small_arm_ros_control" pkg="hector_small_arm_ros_control" type="hector_small_arm_ros_control_node">
+
+      <rosparam command="load" ns="arm_controller" file="$(find hector_small_arm_ros_control)/config/controller.yaml" />
+
+    </node>
 
     <rosparam file="$(find hector_small_arm_ros_control)/config/joint_state_controller.yaml" command="load"/>
     <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
 
+
+    <rosparam file="$(find hector_small_arm_ros_control)/config/joint_trajectory_controller.yaml" command="load"/>
+    <node name="joint_trajectory_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="arm_controller" />
  </launch>
