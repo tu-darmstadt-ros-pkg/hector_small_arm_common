@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <arg name="robot_description" value="$(find xacro)/xacro.py $(find hector_tracked_vehicles_description)/urdf/obelix_ugv_vision_box_small_arm.urdf.xacro" />
+
+  <!-- send the robot XML to param server -->
+  <param name="robot_description" command="$(arg robot_description)" />
+
+  <include file="$(find hector_small_arm_driver)/launch/hector_arm_controller.launch" >
+	<arg name="arm_port_name" value="/dev/ttyUSB0" />
+  </include>
+
+  <include file="$(find hector_small_arm_ros_control)/launch/hector_small_arm_ros_control.launch" />
+
+  <include file="$(find hector_small_arm_moveit)/launch/move_group.launch" />
+
+  <include file="$(find hector_small_arm_moveit)/launch/moveit_rviz.launch" />
+
+</launch>
