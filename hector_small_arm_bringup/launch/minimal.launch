@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <include file="$(find hector_small_arm_driver)/launch/hector_arm_controller.launch" />
+
+  <include file="$(find hector_small_arm_ros_control)/launch/hector_small_arm_ros_control.launch" />
+    
+</launch>
+
